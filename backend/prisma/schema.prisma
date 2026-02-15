@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownedBoards  Board[]     @relation("BoardOwner")
+  tasks        TaskUser[]
+  activities   Activity[]
+  createdTasks Task[]      @relation("TaskCreator")
+
+  @@index([email])
+  @@map("users")
+}
+
+model Board {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner      User       @relation("BoardOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  lists      List[]
+  activities Activity[]
+
+  @@index([ownerId])
+  @@map("boards")
+}
+
+model List {
+  id        String   @id @default(cuid())
+  name      String
+  position  Int
+  boardId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  tasks Task[]
+
+  @@index([boardId])
+  @@index([boardId, position])
+  @@map("lists")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  position    Int
+  listId      String
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  list          List       @relation(fields: [listId], references: [id], onDelete: Cascade)
+  createdBy     User       @relation("TaskCreator", fields: [createdById], references: [id])
+  assignedUsers TaskUser[]
+  activities    Activity[]
+
+  @@index([listId])
+  @@index([listId, position])
+  @@index([createdById])
+  @@map("tasks")
+}
+
+model TaskUser {
+  taskId     String
+  userId     String
+  assignedAt DateTime @default(now())
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, userId])
+  @@index([userId])
+  @@map("task_users")
+}
+
+enum ActivityType {
+  BOARD_CREATED
+  BOARD_UPDATED
+  LIST_CREATED
+  LIST_UPDATED
+  LIST_DELETED
+  TASK_CREATED
+  TASK_UPDATED
+  TASK_DELETED
+  TASK_MOVED
+  TASK_ASSIGNED
+  TASK_UNASSIGNED
+}
+
+model Activity {
+  id          String       @id @default(cuid())
+  type        ActivityType
+  description String
+  userId      String
+  boardId     String
+  taskId      String?
+  metadata    Json?
+  createdAt   DateTime     @default(now())
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  task  Task?  @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([boardId, createdAt])
+  @@index([userId])
+  @@map("activities")
+}
+
+
