@@ -1,21 +1,21 @@
-# 🚀 Real-Time Task Collaboration Platform
+#   Real-Time Task Collaboration Platform
 
 A full-stack real-time task management application similar to Trello/Notion, built with React, Node.js, PostgreSQL, and Socket.io.
 
-## ✨ Features
+##  Features
 
-- ✅ User Authentication (Signup/Login)
-- 📋 Create and manage Boards
-- 📝 Create Lists within Boards
-- ✏️ Create, Update, Delete Tasks
-- 🎯 Drag & Drop tasks across lists
-- 👥 Assign users to tasks
-- ⚡ Real-time updates across multiple users
-- 📜 Activity history tracking
-- 🔍 Search and pagination
-- 📱 Responsive design
+-  User Authentication (Signup/Login)
+-  Create and manage Boards
+-  Create Lists within Boards
+-  Create, Update, Delete Tasks
+-  Drag & Drop tasks across lists
+-  Assign users to tasks
+-  Real-time updates across multiple users
+-  Activity history tracking
+-  Search and pagination
+-  Responsive design
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Frontend
 - **Framework**: React 18 + TypeScript
@@ -35,7 +35,7 @@ A full-stack real-time task management application similar to Trello/Notion, bui
 - **Authentication**: JWT + bcrypt
 - **Validation**: Zod
 
-## 📊 Database Schema
+##  Database Schema
 
 ```
 ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
@@ -74,7 +74,7 @@ A full-stack real-time task management application similar to Trello/Notion, bui
                       └─────────────┘
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -147,7 +147,7 @@ Email: bob@example.com
 Password: Bob123!
 ```
 
-## 📚 API Documentation
+##  API Documentation
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
@@ -181,7 +181,7 @@ Password: Bob123!
 ### Search
 - `GET /api/search?q=query&boardId=id` - Search tasks
 
-## 🔌 Real-Time Events
+##  Real-Time Events
 
 ### Socket.io Events
 
@@ -200,7 +200,7 @@ Password: Bob123!
 - `task:moved` - Task moved to different list
 - `activity:created` - New activity
 
-## 🧪 Testing
+##  Testing
 
 ### Backend Tests
 ```bash
@@ -214,7 +214,7 @@ cd frontend
 npm test
 ```
 
-## 📈 Scalability Considerations
+##  Scalability Considerations
 
 1. **Database**
    - Indexes on frequently queried fields (boardId, listId, userId)
@@ -240,7 +240,7 @@ npm test
    - Optimistic updates for better UX
    - Virtual scrolling for large lists (ready)
 
-## 🏭 Production Deployment
+##  Production Deployment
 
 ### Environment Variables
 ```env
@@ -261,7 +261,7 @@ VITE_WS_URL=https://your-api-domain.com
 - **Frontend**: Vercel, Netlify, AWS S3 + CloudFront
 - **Database**: Railway, Render, AWS RDS, DigitalOcean
 
-## 🎯 Assumptions & Trade-offs
+##  Assumptions & Trade-offs
 
 ### Assumptions
 1. Users must be authenticated to access any board
@@ -275,7 +275,7 @@ VITE_WS_URL=https://your-api-domain.com
 3. **Socket.io**: Easy real-time vs WebRTC for peer-to-peer
 4. **Monorepo**: Single repo vs separate repos for scaling
 
-## 📝 Project Structure
+##  Project Structure
 
 ```
 task-collab-platform/
@@ -309,14 +309,9 @@ task-collab-platform/
 └── README.md
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 This is an interview assignment project. For educational purposes only.
 
-## 📄 License
 
-MIT License
-
----
-
-Built with ❤️ by [Your Name]
+Built with ❤️ by Prashant

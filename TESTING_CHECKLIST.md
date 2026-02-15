@@ -1,4 +1,4 @@
-# ✅ TESTING CHECKLIST
+#  TESTING CHECKLIST
 
 ## Pre-Testing Setup
 - [ ] Backend server running on http://localhost:5000
